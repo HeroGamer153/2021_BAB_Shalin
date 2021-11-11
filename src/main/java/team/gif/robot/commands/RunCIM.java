@@ -33,6 +33,7 @@ public class RunCIM extends CommandBase {
     public void execute() {
         double speed = 0.2;
 
+        //test
         if (state == true){
             CIM.getInstance().setSpeed(speed);
         }
