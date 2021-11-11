@@ -1,8 +1,12 @@
 
 package team.gif.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANDigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import team.gif.robot.subsystems.LimitSwitch;
+import team.gif.robot.subsystems.drivers.Pigeon;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -13,6 +17,9 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
 
   public static OI oi;
+  public static LimitSwitch newSwitch;
+  public static Pigeon newPigeon;
+  public static WPI_TalonSRX newTalon;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -23,6 +30,11 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     System.out.println("robot init");
     // autonomous chooser on the dashboard.
+    newSwitch = new LimitSwitch();
+
+    newTalon = new WPI_TalonSRX(RobotMap.MOTOR_TALON_ONE);
+
+    newPigeon = new Pigeon(newTalon);
 
   }
 
@@ -37,6 +49,9 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
 
     CommandScheduler.getInstance().run();
+
+    System.out.println(newSwitch.switchState());
+    System.out.println(newPigeon.get360Heading());
 
   }
 
