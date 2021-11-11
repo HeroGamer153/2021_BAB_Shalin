@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import team.gif.lib.AxisButton;
+import team.gif.robot.commands.RunCIM;
 
 
 public class OI {
@@ -66,6 +67,9 @@ public class OI {
          * dRT.whileHeld(new EjectCommand());
          *
          */
+
+        dB.whileHeld(new RunCIM(true));
+        dX.whileHeld(new RunCIM(false));
 
     }
 
