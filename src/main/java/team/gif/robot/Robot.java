@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANDigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import team.gif.robot.commands.CIMJoystick;
 import team.gif.robot.subsystems.LimitSwitch;
 import team.gif.robot.subsystems.drivers.Pigeon;
 
@@ -21,6 +22,8 @@ public class Robot extends TimedRobot {
   public static Pigeon newPigeon;
   public static WPI_TalonSRX newTalon;
 
+  public static CIMJoystick CIMJoystickCommand = null;
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -35,6 +38,8 @@ public class Robot extends TimedRobot {
     newTalon = new WPI_TalonSRX(RobotMap.MOTOR_TALON_ONE);
 
     newPigeon = new Pigeon(newTalon);
+
+    CIMJoystickCommand = new CIMJoystick();
 
   }
 
@@ -82,6 +87,10 @@ public class Robot extends TimedRobot {
     System.out.println("teleop init");
 
     oi = new OI();
+
+    CIMJoystickCommand.schedule();
+
+
   }
 
   @Override
