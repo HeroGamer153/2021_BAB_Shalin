@@ -10,17 +10,15 @@ package team.gif.robot.commands;
 import team.gif.robot.subsystems.CIM;
 import team.gif.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import team.gif.robot.subsystems.NEO;
 
 /**
  * Describe the Command functionality here
  */
-public class RunCIM extends CommandBase {
+public class NEOVoltage extends CommandBase {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
-    private boolean state;
-
-    public RunCIM(boolean s) {
-        state = s;
+    public NEOVoltage() {
     }
 
     // Called when the command is initially scheduled.
@@ -31,17 +29,7 @@ public class RunCIM extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double speed = 0.2;
-
-        //test
-        if (state == true){
-            CIM.getInstance().setSpeed(speed);
-        }
-        else{
-            CIM.getInstance().setSpeed(-speed);
-        }
-
-
+        NEO.getInstance().setVoltage(2.5);
     }
 
     // Returns true when the command should end.
@@ -53,6 +41,6 @@ public class RunCIM extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        CIM.getInstance().setSpeed(0);
+        NEO.getInstance().setVoltage(0);
     }
 }

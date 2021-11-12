@@ -7,6 +7,8 @@
 
 package team.gif.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID;
+import team.gif.robot.Robot;
 import team.gif.robot.subsystems.CIM;
 import team.gif.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -14,13 +16,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /**
  * Describe the Command functionality here
  */
-public class RunCIM extends CommandBase {
+public class CIMJoystick extends CommandBase {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
-    private boolean state;
-
-    public RunCIM(boolean s) {
-        state = s;
+    public CIMJoystick() {
     }
 
     // Called when the command is initially scheduled.
@@ -31,17 +30,13 @@ public class RunCIM extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double speed = 0.2;
+        double percent = Robot.oi.driver.getY(GenericHID.Hand.kRight);
 
-        //test
-        if (state == true){
-            CIM.getInstance().setSpeed(speed);
-        }
-        else{
-            CIM.getInstance().setSpeed(-speed);
+        if (Math.abs(percent) < 0.05){
+            percent = 0;
         }
 
-
+        CIM.getInstance().setSpeed(percent);
     }
 
     // Returns true when the command should end.
@@ -53,6 +48,5 @@ public class RunCIM extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        CIM.getInstance().setSpeed(0);
     }
 }
